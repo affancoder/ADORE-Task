@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number List</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+<body>
+    <div id="mydiv"></div>
+    <button class="refresh-button" onclick="refreshPage()">Refresh Page</button>
+    <script type="text/babel">
+        const allData = Array.from({ length: 40 }, () => Math.floor(Math.random() * 40));
+
+        function App() {
+            const [currentList, setCurrentList] = React.useState(allData);
+
+            const sortNumbers = () => {
+                const sortedList = [...currentList].sort((a, b) => a - b);
+                setCurrentList(sortedList);
+            };
+
+            const filterOddNumbers = () => {
+                const oddNumbers = currentList.filter(num => num % 2 !== 0);
+                setCurrentList(oddNumbers);
+            };
+
+            return (
+                <>
+                    <div style={{ display: "flex" }}>
+                        <button style={{ width: "100px", height: "70px" }} onClick={sortNumbers}>Sort</button>
+                        <button style={{ width: "100px", height: "70px" }} onClick={filterOddNumbers}>Filter Odd Numbers</button>
+                    </div>
+                    {currentList.map((item, index) => (
+                        <div key={index}>{item.toString()}</div>
+                    ))}
+                </>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById("mydiv"));
+        root.render(<App />);
+    </script>
+    <script>
+      function refreshPage() {
+          location.reload();
+      }
+  </script>
+</body>
+</html>
