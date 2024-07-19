@@ -1,93 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volunteer Management</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            padding: 20px;
-            background: #f0f2f5;
-        }
-        .button-container, .search-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .button-container button, .search-container button {
-            width: 150px;
-            height: 50px;
-            margin: 0 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 25px;
-            background-color: #007bff;
-            color: white;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .button-container button:hover, .search-container button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-        .search-container input {
-            padding: 10px;
-            border-radius: 25px;
-            border: 1px solid #ddd;
-            width: 300px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-        .check-result {
-            margin-top: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #007bff;
-        }
-        @media (max-width: 480px) {
-            .button-container button, .search-container button {
-                width: 100px;
-                height: 35px;
-                font-size: 12px;
-            }
-            .search-container input {
-                width: calc(100% - 120px);
-                max-width: 150px;
-            }
-            th, td {
-                font-size: 12px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Management</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
+
 <body>
-    <div id="mydiv"></div>
-    <button class="refresh-button" onclick="refreshPage()">Refresh Page</button>
-    <script type="text/babel">
-        const allData = Array.from({ length: 40 }, () => ({
+  <div id="mydiv"></div>
+  <button class="refresh-button" onclick="refreshPage()">Refresh Page</button>
+  <script type="text/babel">
+    const allData = Array.from({ length: 40 }, () => ({
             id: Math.floor(Math.random() * 100000),
             name: ["Prachi", "Ananya", "Riya", "Pranav", "Ani"][Math.floor(Math.random() * 5)],
             task: "Task " + Math.floor(Math.random() * 10),
@@ -127,13 +56,9 @@
 
             return (
                 <>
-                    <div className="button-container">
-                        <button>Add Volunteer</button>
-                        <button>Add Task</button>
-                    </div>
                     <div className="search-container">
                         <input type="text" placeholder="Search by name or number..." value={searchTerm} onChange={handleSearch} />
-                        <button onClick={sortNumbers}>Sort By ID</button>
+                        <button onClick={sortNumbers}>{sortOrder === "asc" ? "Sort Ascending" : "Sort Descending"}</button>
                     </div>
                     <table>
                         <thead>
@@ -168,10 +93,11 @@
         const root = ReactDOM.createRoot(document.getElementById("mydiv"));
         root.render(<App />);
     </script>
-    <script>
-        function refreshPage() {
-            location.reload();
-        }
-    </script>
+  <script>
+    function refreshPage() {
+      location.reload();
+    }
+  </script>
 </body>
+
 </html>
