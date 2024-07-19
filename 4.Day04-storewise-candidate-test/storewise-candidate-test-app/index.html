@@ -4,11 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number List</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .button-container button {
+            width: 180px;
+            height: 50px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 25px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button-container button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .refresh-button {
+            margin-bottom: 20px;
+            font-size: 16px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 25px;
+            background-color: #28a745;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .refresh-button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .check-result {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
 <body>
     <div id="mydiv"></div>
     <button class="refresh-button" onclick="refreshPage()">Refresh Page</button>
@@ -17,10 +86,13 @@
 
         function App() {
             const [currentList, setCurrentList] = React.useState(allData);
+            const [sortOrder, setSortOrder] = React.useState("asc");
+            const [checkResult, setCheckResult] = React.useState("");
 
             const sortNumbers = () => {
-                const sortedList = [...currentList].sort((a, b) => a - b);
+                const sortedList = [...currentList].sort((a, b) => sortOrder === "asc" ? a - b : b - a);
                 setCurrentList(sortedList);
+                setSortOrder(sortOrder === "asc" ? "desc" : "asc");
             };
 
             const filterOddNumbers = () => {
@@ -28,15 +100,39 @@
                 setCurrentList(oddNumbers);
             };
 
+            const checkAscending = () => {
+                const isAscending = currentList.every((num, i) => i === 0 || num >= currentList[i - 1]);
+                setCheckResult(isAscending ? "The list is in ascending order" : "The list is not in ascending order");
+            };
+
             return (
                 <>
-                    <div style={{ display: "flex" }}>
-                        <button style={{ width: "100px", height: "70px" }} onClick={sortNumbers}>Sort</button>
-                        <button style={{ width: "100px", height: "70px" }} onClick={filterOddNumbers}>Filter Odd Numbers</button>
+                    <div className="button-container">
+                        <button onClick={sortNumbers}>
+                            Sort ({sortOrder === "asc" ? "Ascending" : "Descending"})
+                        </button>
+                        <button onClick={filterOddNumbers}>
+                            Filter Odd Numbers
+                        </button>
+                        <button onClick={checkAscending}>
+                            Check Ascending
+                        </button>
                     </div>
-                    {currentList.map((item, index) => (
-                        <div key={index}>{item.toString()}</div>
-                    ))}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Numbers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {currentList.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <div className="check-result">{checkResult}</div>
                 </>
             );
         }
@@ -45,9 +141,9 @@
         root.render(<App />);
     </script>
     <script>
-      function refreshPage() {
-          location.reload();
-      }
-  </script>
+        function refreshPage() {
+            location.reload();
+        }
+    </script>
 </body>
 </html>
