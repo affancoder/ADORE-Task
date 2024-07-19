@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+        .button-container, .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .button-container button, .search-container button {
+            width: 150px;
+            height: 50px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 25px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button-container button:hover, .search-container button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .search-container input {
+            padding: 10px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            width: 300px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .check-result {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div id="mydiv"></div>
+    <button class="refresh-button" onclick="refreshPage()">Refresh Page</button>
+    <script type="text/babel">
+        const allData = Array.from({ length: 40 }, () => ({
+            id: Math.floor(Math.random() * 100000),
+            name: ["Prachi", "Ananya", "Riya", "Pranav", "Ani"][Math.floor(Math.random() * 5)],
+            task: "Task " + Math.floor(Math.random() * 10),
+            status: ["Active", "Progressive", "Dormant", "Paused", "Completed"][Math.floor(Math.random() * 5)]
+        }));
+
+        function App() {
+            const [currentList, setCurrentList] = React.useState(allData);
+            const [sortOrder, setSortOrder] = React.useState("asc");
+            const [searchTerm, setSearchTerm] = React.useState("");
+            const [checkResult, setCheckResult] = React.useState("");
+
+            const sortNumbers = () => {
+                const sortedList = [...currentList].sort((a, b) => sortOrder === "asc" ? a.id - b.id : b.id - a.id);
+                setCurrentList(sortedList);
+                setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+            };
+
+            const filterOddNumbers = () => {
+                const oddNumbers = currentList.filter(num => num.id % 2 !== 0);
+                setCurrentList(oddNumbers);
+            };
+
+            const checkAscending = () => {
+                const isAscending = currentList.every((num, i) => i === 0 || num.id >= currentList[i - 1].id);
+                setCheckResult(isAscending ? "The list is in ascending order" : "The list is not in ascending order");
+            };
+
+            const handleSearch = (e) => {
+                setSearchTerm(e.target.value);
+            };
+
+            const filteredList = currentList.filter(item =>
+                item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.id.toString().includes(searchTerm)
+            );
+
+            return (
+                <>
+                    <div className="button-container">
+                        <button>Add Volunteer</button>
+                        <button>Add Task</button>
+                    </div>
+                    <div className="search-container">
+                        <input type="text" placeholder="Search by name or number..." value={searchTerm} onChange={handleSearch} />
+                        <button onClick={sortNumbers}>Sort By ID</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Volunteer ID</th>
+                                <th>Name</th>
+                                <th>Task</th>
+                                <th>Action</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredList.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.id}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.task}</td>
+                                    <td>
+                                        <button onClick={sortNumbers}><i className="fas fa-sync-alt"></i></button>
+                                        <button onClick={filterOddNumbers}><i className="fas fa-user"></i></button>
+                                    </td>
+                                    <td>{item.status}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <div className="check-result">{checkResult}</div>
+                </>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById("mydiv"));
+        root.render(<App />);
+    </script>
+    <script>
+        function refreshPage() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
