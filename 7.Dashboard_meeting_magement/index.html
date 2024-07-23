@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Schedules</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <button class="btn btn-secondary m-2" id="humberger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-bars"></i></button>
+
+      <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"><img src="assests/logo.png"><b>Task</b></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></i></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul>
+            <p>Menu</p>
+            <li><a href="#"><i class="fa-solid fa-list-check"></i>&nbsp;Task</a></li>
+            <li><a href="#"><i class="fa-solid fa-hashtag"></i>&nbsp;Hastags</a></li>
+            <li><a href="#"><i class="fa-regular fa-clock"></i></i>&nbsp;Timeshift</a></li>
+            <li><a href="#"><i class="fa-solid fa-plus"></i>&nbsp;Issues</a></li>
+            <li><a href="#"><i class="fa-solid fa-asterisk"></i></i>&nbsp;Risk</a></li>
+          </ul>
+          <ul>
+            <p>Favourite Projects</p>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Mobile app design</a></li>
+            <li><a href="#">Product Marketing Plan</a></li>
+          </ul>
+          <ul>
+            <p>Saved Filters</p>
+            <li><a href="#">Upcoming Meetings</a></li>
+            <li><a href="#">Submitted for review</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-content">
+    
+    <nav class="navbar">
+      <div class="navbar-left">
+          <button class="designer-btn">Designer</button>
+          <div class="dropdown">
+              <button class="dropbtn">Website Development</button>
+              <div class="dropdown-content">
+                  <a href="#">HTML</a>
+                  <a href="#">CSS</a>
+                  <a href="#">JavaScript</a>
+              </div>
+          </div>
+      </div>
+      <div class="navbar-right">
+          <input type="text" placeholder="Search" class="search-box">
+          <button class="icon-btn"><i class="fa fa-clock"></i></button>
+          <button class="icon-btn">Add Task</button>
+          <button class="icon-btn"><i class="fa fa-user"></i></button>
+          <button class="icon-btn"><i class="fa fa-bell"></i></button>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="headline">
+        <h3><b>Meetings</b></h3>
+        <ul>
+          <a><li><i class="fa-solid fa-list-check"></i>&nbsp;List</li></a>
+          <li><i class="fa-solid fa-trash-can"></i>&nbsp;Delete All</li>
+          <li><i class="fa-solid fa-eye"></i>&nbsp;Show All</li>
+        </ul>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Task</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Attendees</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sales Presentation</td>
+            <td><button class="btn primary">Upcoming</button></td>
+            <td>Marketing</td>
+            <td>Oct 1, 2018</td>
+            <td>03:00 PM</td>
+            <td>Conference Hall</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>Invision Collaboration</td>
+            <td><button class="btn danger">Cancelled</button></td>
+            <td>Development</td>
+            <td>Oct 15, 2018</td>
+            <td>12:15 PM</td>
+            <td>Meeting Room</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>Testing V1</td>
+            <td><button class="btn warning">In Progress</button></td>
+            <td>Quality Assurance</td>
+            <td>Oct 18, 2018</td>
+            <td>05:00 PM</td>
+            <td>Meeting Room</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>Low Fidelity Wireframes</td>
+            <td><button class="btn success">Published</button></td>
+            <td>Website Development</td>
+            <td>Oct 25, 2018</td>
+            <td>02:00 PM</td>
+            <td>Designer’s Desk</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Design Catch Up</td>
+            <td><button class="btn danger">Cancelled</button></td>
+            <td>Website Development</td>
+            <td>Sep 28, 2018</td>
+            <td>04:00 PM</td>
+            <td>Designer’s Desk</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>Cross Browser Compatibility</td>
+            <td><button class="btn success">Published</button></td>
+            <td>Website Development</td>
+            <td>Sep 21, 2018</td>
+            <td>01:00 PM</td>
+            <td>Meeting Room</td>
+            <td>4</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
