@@ -1,0 +1,183 @@
+/* styles.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img{
+    width: 80px;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* background: linear-gradient(to right, rgb(18, 194, 233), rgb(196, 113, 237), rgb(246, 79, 89)); */
+    /* background: linear-gradient(89.8deg, rgb(39, 115, 255) 4.3%, rgb(62, 211, 232) 101.4%); */
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: black;
+    font-weight: 500;
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    transition: all 0.3s;
+}
+
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* background: radial-gradient(circle at 10% 20%, rgb(0, 255, 176) 0%, rgb(66, 105, 242) 90%); */
+    background: url("assets/bg.jpg");
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+}
+
+.home-content {
+    animation: fadeIn 2s ease-in-out;
+}
+
+.home h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.home p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    padding: 0.5rem 1.5rem;
+    background: linear-gradient(to right, #ff6b6b, #ff4757);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+    background: linear-gradient(to right, #ff4757, #ff6b6b);
+    transform: translateY(-2px);
+}
+
+section {
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.about, .services, .contact {
+    background: #f4f4f4;
+    margin: 2rem 0;
+    padding: 4rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: linear-gradient(68.8deg, rgba(0, 0, 0, 0.95) 1.8%, rgb(0, 55, 79) 31.8%, rgb(9, 93, 134) 56.2%, rgb(15, 155, 217) 89%);
+    color: #fff;
+    /* position: fixed; */
+    width: 100%;
+    bottom: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #12111127;
+        position: absolute;
+        top: 80px;
+        right: 0;
+        width: 100%;
+    }
+
+    .nav-links a {
+        padding: 1rem;
+        text-align: center;
+        /* border-top: 1px solid #444; */
+    }
+
+    .burger {
+        display: flex;
+    }
+
+    .nav-links.nav-active {
+        display: flex;
+    }
+
+    .home{
+        background: url(assets/responsive-bg.jpg);
+        background-size: cover;
+    }
+    
+}
+
+.burger.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.burger.toggle .line2 {
+    opacity: 0;
+}
+
+.burger.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
