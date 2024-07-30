@@ -2,6 +2,7 @@
 
 nav{
     padding: 14px 40px !important;
+    position: fixed !important;
 }
 
 .navbar {
@@ -74,10 +75,12 @@ nav{
         display: none;
         flex-direction: column;
         width: 100%;
-        background-color: #1a1a1a;
+        height: 240px;
+        background-color: #0a2351;
         position: absolute;
-        top: 80px;
-        left: 0;    }
+        top: 70px;
+        left: 0;    
+    }
 
     .navbar-links.open {
         display: flex;
