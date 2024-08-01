@@ -23,9 +23,11 @@
 
 .hero-content p {
     font-size: 1.2rem;
-    /* color: #34495e; */
-    color: aliceblue;
     margin-bottom: 1rem;
+}
+
+#detail-hero p{
+    color: aliceblue !important;
 }
 
 .hero-content ul {

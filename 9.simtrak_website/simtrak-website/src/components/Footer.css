@@ -41,6 +41,22 @@
     display: inline-block;
 }
 
+.social-media i{
+    font-size: 1.8rem;
+}
+
+.social-media i:hover{
+    color: #47bcf2;
+}
+
+.social-media #instagram:hover{
+    color: red;
+}
+
+.social-media #threads:hover{
+    color: gray;
+}
+
 .social-media img {
     width: 24px;
     height: 24px;

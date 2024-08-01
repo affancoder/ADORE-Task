@@ -1,6 +1,6 @@
 .blog-section {
     text-align: center;
-    padding: 40px;
+    padding: 20px;
     background-color: #fff;
     max-width: 1200px;
     margin: auto;
@@ -8,7 +8,7 @@
 }
 
 .blog-title {
-    color: #1a1a1a;
+    color: #0a234e;
     font-size: 2em;
     margin-bottom: 10px;
 }
@@ -22,12 +22,12 @@
 .blog-grid {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 16px;
     flex-wrap: wrap;
 }
 
 .blog-card {
-    flex: 1 1 calc(33.333% - 20px);
+    flex: 1 1 calc(23.333% - 20px);
     box-sizing: border-box;
     background: #f9f9f9;
     padding: 20px;
@@ -40,15 +40,16 @@
     width: 100%;
     height: auto;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .blog-card h3 {
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin: 10px 0;
 }
 
 .blog-card p {
-    color: #777;
+    color: #515050;
     font-size: 0.9em;
 }
 

@@ -9,7 +9,7 @@ import heroImage2 from '../assets/hero-image-2.webp'; // replace with actual ima
 const Detail = () => {
   return (
     <div className="hero-section1">
-      <div className="hero-content">
+      <div className="hero-content" id="detail-hero">
         <h1>Unlock Your Business's Full Potential with Us</h1>
         <p>Transform your business into a thriving powerhouse as we offer a wide array of services designed to streamline your operations and boost your brand’s presence!</p>
         <ul>
