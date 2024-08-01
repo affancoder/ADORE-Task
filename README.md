@@ -1,4 +1,4 @@
 # Team Echo | ADORE
 
-Done by MD Affan Asghar
+MD Affan Asghar
 NIN - 15303
