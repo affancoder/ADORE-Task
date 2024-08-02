@@ -59,6 +59,20 @@
     margin: 0;
 }
 
+#service-btn{
+    background-color: rgb(68, 148, 253);
+    color: black !important;
+    border: none;
+    border-radius: 8px !important;
+    margin: 10px;
+    flex: 1;
+}
+
+button p{
+    color: white !important;
+    font-weight: 500;
+}
+
 @media (max-width: 768px) {
     .service-card {
         flex: 1 1 calc(50% - 40px);

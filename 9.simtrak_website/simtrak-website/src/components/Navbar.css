@@ -29,6 +29,15 @@ nav {
     font-weight: bold;
 }
 
+.navbar-logo a{
+    text-decoration: none;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
 .navbar-logo img {
     width: 32px;
     border-radius: 50%;

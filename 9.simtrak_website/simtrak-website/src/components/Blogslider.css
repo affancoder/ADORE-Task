@@ -27,7 +27,7 @@
 }
 
 .blog-card {
-    flex: 1 1 calc(23.333% - 20px);
+    flex: 1 1 calc(13.333% - 20px);
     box-sizing: border-box;
     background: #f9f9f9;
     padding: 20px;

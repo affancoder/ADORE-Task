@@ -27,8 +27,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <img src={logo}></img>
-          Simtrak <span>Solution</span>
+          <a href='/'><img src={logo}></img>Simtrak <span>Solution</span></a>
         </div>
         <div className="navbar-search" id="main-search">
           <input list="suggestions" name="search" placeholder="Search..." className="search-box" />
