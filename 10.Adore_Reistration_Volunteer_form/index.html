@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADORE Volunteering Application Form</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <img src="logo.jpg" alt="ADORE Logo">
+      <h1>ADORE Volunteering Application Form</h1>
+      <p>ADORE is a global voluntary network of youth to perform social activities. Website: <a href="http://www.adoreglobal.org">www.adoreglobal.org</a></p>
+    </header>
+    <form id="applicationForm">
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="contact">Contact Number *</label>
+        <input type="tel" id="contact" name="contact" required>
+      </div>
+      <div class="form-group">
+        <label for="whatsapp">WhatsApp Number *</label>
+        <input type="tel" id="whatsapp" name="whatsapp" required>
+      </div>
+      <div class="form-group">
+        <label for="city">City *</label>
+        <input type="text" id="city" name="city" required>
+      </div>
+      <div class="form-group">
+        <label for="state">State *</label>
+        <input type="text" id="state" name="state" required>
+      </div>
+      <div class="form-group">
+        <label for="country">Country *</label>
+        <input type="text" id="country" name="country" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="fluency">Rate Yourself in Fluency *</label>
+        <input type="range" id="fluency" name="fluency" min="1" max="10" value="5" oninput="updateRatingValue(this.value, 'fluency-rating')">
+        <div class="rating-value">Rating: <span id="fluency-rating">5</span></div>
+      </div>
+      <div class="form-group">
+        <label for="writing">Rate Yourself in Writing *</label>
+        <input type="range" id="writing" name="writing" min="1" max="10" value="5" oninput="updateRatingValue(this.value, 'writing-rating')">
+        <div class="rating-value">Rating: <span id="writing-rating">5</span></div>
+      </div>
+      <div class="form-group">
+        <label for="intro">Please give a brief introduction of yours *</label>
+        <textarea id="intro" name="intro" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="source">Source of joining *</label>
+        <input id="source" name="source" required></input>
+      </div>
+      <div class="form-group">
+        <label for="motivation">What motivated you to apply for this volunteering opportunity? *</label>
+        <textarea id="motivation" name="motivation" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="meeting-date">Please specify a suitable date for an online meeting to discuss further *</label>
+        <input type="date" id="meeting-date" name="meeting-date" required>
+      </div>
+      <div class="form-group">
+        <label for="meeting-time">Please specify a suitable time for an online meeting to discuss further *</label>
+        <input type="time" id="meeting-time" name="meeting-time" required>
+      </div>
+      <div class="form-group">
+        <label for="platform">Which platform are you comfortable with, for the online meeting? *</label>
+        <select id="platform" name="platform" required>
+          <option value="zoom">Zoom</option>
+          <option value="google-meet">Google Meet</option>
+          <option value="skype">Skype</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    function updateRatingValue(value, elementId) {
+      document.getElementById(elementId).innerText = value;
+    }
+
+    document.getElementById('applicationForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(this);
+      const applicationData = {};
+
+      formData.forEach((value, key) => {
+        applicationData[key] = value;
+      });
+
+      let applications = JSON.parse(localStorage.getItem('applications')) || [];
+      applications.push(applicationData);
+      localStorage.setItem('applications', JSON.stringify(applications));
+
+      window.location.href = 'responses.html';
+    });
+  </script>
+</body>
+
+</html>

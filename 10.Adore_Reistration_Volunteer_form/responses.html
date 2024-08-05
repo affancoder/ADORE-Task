@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Responses</title>
+  <link rel="stylesheet" href="table-styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <img src="logo.jpg" alt="ADORE Logo">
+      <h1>ADORE Volunteering Application Registered Data</h1>
+      <p>ADORE is a global voluntary network of youth to perform social activities. Website: <a href="http://www.adoreglobal.org">www.adoreglobal.org</a></p>
+    </header>
+    <input type="text" id="searchBox" placeholder="Search by name...">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact Number</th>
+            <th>WhatsApp Number</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Language</th>
+            <th>Fluency</th>
+            <th>Writing</th>
+            <th>Introduction</th>
+            <th>Source</th>
+            <th>Motivation</th>
+            <th>Meeting Date</th>
+            <th>Meeting Time</th>
+            <th>Platform</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="responsesBody">
+          <!-- Data rows will be inserted here by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <button id="prevPage">Previous</button>
+      <span id="pageInfo"></span>
+      <button id="nextPage">Next</button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const responsesBody = document.getElementById('responsesBody');
+      const searchBox = document.getElementById('searchBox');
+      const prevPageBtn = document.getElementById('prevPage');
+      const nextPageBtn = document.getElementById('nextPage');
+      const pageInfo = document.getElementById('pageInfo');
+      const applications = JSON.parse(localStorage.getItem('applications')) || [];
+      let filteredApplications = applications;
+      let currentPage = 1;
+      const rowsPerPage = 10;
+
+      function displayTable(applications, page = 1) {
+        responsesBody.innerHTML = '';
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const paginatedApplications = applications.slice(start, end);
+
+        paginatedApplications.forEach((application, index) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${application.name}</td>
+            <td>${application.email}</td>
+            <td>${application.contact}</td>
+            <td>${application.whatsapp}</td>
+            <td>${application.city}</td>
+            <td>${application.state}</td>
+            <td>${application.country}</td>
+            <td>${application.language}</td>
+            <td>${application.fluency}</td>
+            <td>${application.writing}</td>
+            <td>${application.intro}</td>
+            <td>${application.source}</td>
+            <td>${application.motivation}</td>
+            <td>${application['meeting-date']}</td>
+            <td>${application['meeting-time']}</td>
+            <td>${application.platform}</td>
+            <td id="status-${index}">${application.status || 'Pending'}</td>
+            <td>
+              <button onclick="updateStatus(${index}, 'Approved')">Approve</button>
+              <button onclick="updateStatus(${index}, 'Disapproved')">Disapprove</button>
+            </td>
+          `;
+          responsesBody.appendChild(row);
+        });
+
+        pageInfo.innerText = `Page ${page} of ${Math.ceil(applications.length / rowsPerPage)}`;
+      }
+
+      searchBox.addEventListener('input', function () {
+        const searchTerm = searchBox.value.toLowerCase();
+        filteredApplications = applications.filter(application => application.name.toLowerCase().includes(searchTerm));
+        currentPage = 1;
+        displayTable(filteredApplications, currentPage);
+      });
+
+      prevPageBtn.addEventListener('click', function () {
+        if (currentPage > 1) {
+          currentPage--;
+          displayTable(filteredApplications, currentPage);
+        }
+      });
+
+      nextPageBtn.addEventListener('click', function () {
+        if (currentPage < Math.ceil(filteredApplications.length / rowsPerPage)) {
+          currentPage++;
+          displayTable(filteredApplications, currentPage);
+        }
+      });
+
+      window.updateStatus = function (index, status) {
+        const actualIndex = (currentPage - 1) * rowsPerPage + index;
+        applications[actualIndex].status = status;
+        localStorage.setItem('applications', JSON.stringify(applications));
+        displayTable(filteredApplications, currentPage);
+      }
+
+      displayTable(filteredApplications, currentPage);
+    });
+  </script>
+</body>
+
+</html>
