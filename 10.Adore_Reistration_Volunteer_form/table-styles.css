@@ -116,6 +116,17 @@ table th {
     font-size: 16px;
 }
 
+td button:nth-child(1){
+    background-color: #4CAF50;
+    color: white;
+}
+
+td button:nth-child(2){
+    background-color: red;
+    color: white;
+}
+
+
 @media (max-width: 600px) {
     .container {
         display: block;
