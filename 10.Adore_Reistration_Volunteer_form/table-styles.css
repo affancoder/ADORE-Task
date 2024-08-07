@@ -119,11 +119,15 @@ table th {
 td button:nth-child(1){
     background-color: #4CAF50;
     color: white;
+    border-radius: 8px;
+    height: 32px;
 }
 
 td button:nth-child(2){
     background-color: red;
     color: white;
+    border-radius: 8px;
+    height: 32px;
 }
 
 
