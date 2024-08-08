@@ -6,47 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Application Responses</title>
   <link rel="stylesheet" href="table-styles.css">
-  <style>
-    .popup {
-      display: none;
-      position: fixed;
-      width: 400px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      border: 2px solid #ccc;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-      transition: all 0.5s;
-    }
-
-    .popup.active {
-      display: block;
-    }
-
-    .popup .close {
-      float: right;
-      cursor: pointer;
-      font-size: 3rem;
-    }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 500;
-    }
-
-    .overlay.active {
-      display: block;
-    }
-  </style>
 </head>
 
 <body>
@@ -62,8 +21,11 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>Email</th>
+            <!-- <th>Email</th> -->
             <th>Meeting Date & Time</th>
+            <th>Platform</th>
+            <th>Meeting Round</th>
+            <th>Remarks</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -90,119 +52,9 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const responsesBody = document.getElementById('responsesBody');
-      const searchBox = document.getElementById('searchBox');
-      const prevPageBtn = document.getElementById('prevPage');
-      const nextPageBtn = document.getElementById('nextPage');
-      const pageInfo = document.getElementById('pageInfo');
-      const popup = document.getElementById('popup');
-      const popupClose = document.getElementById('popupClose');
-      const popupContent = document.getElementById('popupContent');
-      const overlay = document.getElementById('overlay');
-
-      const applications = JSON.parse(localStorage.getItem('applications')) || [];
-      let filteredApplications = applications;
-      let currentPage = 1;
-      const rowsPerPage = 10;
-
-      function displayTable(applications, page = 1) {
-        responsesBody.innerHTML = '';
-        const start = (page - 1) * rowsPerPage;
-        const end = start + rowsPerPage;
-        const paginatedApplications = applications.slice(start, end);
-
-        paginatedApplications.forEach((application, index) => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td><a href="#" class="name-link" data-index="${index}">${application.name}</a></td>
-            <td>${application.email}</td>
-            <td>${application['meeting-date']} ${application['meeting-time']}</td>
-            <td id="status-${index}">${application.status || 'Pending'}</td>
-            <td>
-              <button onclick="updateStatus(${index}, 'Approved')">Approve</button>
-              <button onclick="updateStatus(${index}, 'Disapproved')">Disapprove</button>
-            </td>
-          `;
-          responsesBody.appendChild(row);
-        });
-
-        pageInfo.innerText = `Page ${page} of ${Math.ceil(applications.length / rowsPerPage)}`;
-      }
-
-      function showPopup(index) {
-        const application = filteredApplications[index];
-        popupContent.innerHTML = `
-          <p><strong>Name:</strong> ${application.name}</p>
-          <p><strong>Email:</strong> ${application.email}</p>
-          <p><strong>Contact Number:</strong> ${application.contact}</p>
-          <p><strong>WhatsApp Number:</strong> ${application.whatsapp}</p>
-          <p><strong>City:</strong> ${application.city}</p>
-          <p><strong>State:</strong> ${application.state}</p>
-          <p><strong>Country:</strong> ${application.country}</p>
-          <p><strong>Language:</strong> ${application.language}</p>
-          <p><strong>Fluency:</strong> ${application.fluency}</p>
-          <p><strong>Writing:</strong> ${application.writing}</p>
-          <p><strong>Introduction:</strong> ${application.intro}</p>
-          <p><strong>Source:</strong> ${application.source}</p>
-          <p><strong>Motivation:</strong> ${application.motivation}</p>
-          <p><strong>Meeting Date:</strong> ${application['meeting-date']}</p>
-          <p><strong>Meeting Time:</strong> ${application['meeting-time']}</p>
-          <p><strong>Platform:</strong> ${application.platform}</p>
-          <p><strong>Status:</strong> ${application.status || 'Pending'}</p>
-        `;
-        popup.classList.add('active');
-        overlay.classList.add('active');
-      }
-
-      searchBox.addEventListener('input', function () {
-        const searchTerm = searchBox.value.toLowerCase();
-        filteredApplications = applications.filter(application => application.name.toLowerCase().includes(searchTerm));
-        currentPage = 1;
-        displayTable(filteredApplications, currentPage);
-      });
-
-      prevPageBtn.addEventListener('click', function () {
-        if (currentPage > 1) {
-          currentPage--;
-          displayTable(filteredApplications, currentPage);
-        }
-      });
-
-      nextPageBtn.addEventListener('click', function () {
-        if (currentPage < Math.ceil(filteredApplications.length / rowsPerPage)) {
-          currentPage++;
-          displayTable(filteredApplications, currentPage);
-        }
-      });
-
-      responsesBody.addEventListener('click', function (event) {
-        if (event.target.classList.contains('name-link')) {
-          const index = event.target.getAttribute('data-index');
-          showPopup(index);
-        }
-      });
-
-      popupClose.addEventListener('click', function () {
-        popup.classList.remove('active');
-        overlay.classList.remove('active');
-      });
-
-      overlay.addEventListener('click', function () {
-        popup.classList.remove('active');
-        overlay.classList.remove('active');
-      });
-
-      window.updateStatus = function (index, status) {
-        const actualIndex = (currentPage - 1) * rowsPerPage + index;
-        applications[actualIndex].status = status;
-        localStorage.setItem('applications', JSON.stringify(applications));
-        displayTable(filteredApplications, currentPage);
-      }
-
-      displayTable(filteredApplications, currentPage);
-    });
+    
   </script>
+  <script src="script.js"></script>
 </body>
 
 </html>
