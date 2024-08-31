@@ -1,3 +1,4 @@
+html,
 body {
     font-family: Arial, sans-serif;
     background-color: #5a4f95 !important;
@@ -5,14 +6,84 @@ body {
     padding: 0;
 }
 
-.container {
+body {
+    background-color: rgb(0, 0, 33);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    flex-wrap: wrap;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 190px;
+    height: 100vh;
+    padding: 0 1.7rem;
+    color: #fff;
+    overflow: hidden;
+    transition: all 0.5s linear;
+    background: rgba(113, 99, 186, 255);
+}
+
+.logo {
+    height: 80px;
+    padding: 16px;
+}
+
+.menu {
+    height: 88%;
+    position: relative;
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 1rem;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+}
+
+.menu li:hover,
+.active {
+    background: #e0e0e058;
+}
+
+.menu a {
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logout {
+    position: absolute;
+    bottom: 10;
+    left: 0;
     width: 100%;
-    max-width: 1200px;
+}
+
+.container {
+    width: 90% !important;
+    margin-left: 15% !important;
+    margin-top: -44% !important;
+    max-width: 800px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    transition: width 0.3s;
 }
 
 header {
@@ -49,14 +120,13 @@ header img {
 
 #searchBox {
     position: relative;
-    top: 50%;
-    left: 40%;
+    top: 100%;
+    left: 86%;
+    transform: translate(-50%, 54%);
     width: 260px;
     padding: 10px;
-    margin-left: -10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 2px solid rgb(111, 109, 109);
+    border-radius: 12px;
 }
 
 .table-container {
@@ -72,7 +142,7 @@ table {
 table th,
 table td {
     border: 1px solid #ddd;
-    padding: 12px;
+    padding: 10px;
     text-align: left;
     white-space: nowrap;
 }
@@ -102,7 +172,7 @@ table th {
 }
 
 .pagination button {
-    padding: 10px 20px;
+    padding: 8px 10px;
     border: none;
     background-color: #4CAF50;
     color: #fff;
@@ -121,6 +191,7 @@ table th {
 
 td button:nth-child(1) {
     background-color: #4CAF50;
+    /* background-color: #5a4f95; */
     color: white;
     border-radius: 8px;
     height: 32px;
@@ -129,7 +200,7 @@ td button:nth-child(1) {
 }
 
 td button:nth-child(2) {
-    background-color: red; 
+    background-color: red;
     color: white;
     border-radius: 8px;
     height: 32px;
@@ -137,44 +208,58 @@ td button:nth-child(2) {
     border: none;
 }
 
-.popup {
-    display: none;
-    position: fixed;
-    height: 80%;
-    width: 80%;
-    max-width: 400px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    opacity: 0;
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    border: 2px solid #ccc;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    overflow-y: auto;
+.name-link {
+    text-decoration: none;
+    color: white;
 }
 
-.popup.active {
-    display: block;
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
+.platform-link a {
+    color: white;
+    text-decoration: none;
+}
+
+#popup {
+    padding: 20px;
+}
+
+.custom-modal-width {
+    max-width: 960px !important;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px;
+}
+
+.grid-item {
+    padding: 5px;
+    font-size: 14px;
+}
+
+#popup span {
+    display: flex;
+    justify-content: space-between;
+}
+
+#popup p {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }
 
 .popup .close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 2% !important;
+    right: 8%;
     cursor: pointer;
-    font-size: 3.2rem;
-    color: #999;
-    transition: color 0.3s;
+    font-size: 2.5rem;
+    color: gray;
+    transition: all 0.4s;
 }
 
 .popup .close:hover {
-    color: #333;
+    color: #000;
 }
 
 .overlay {
@@ -195,22 +280,15 @@ td button:nth-child(2) {
     opacity: 1;
 }
 
-#popupContent {
-    font: 1em sans-serif;
-    cursor: pointer;
-    padding: 20px;
-}
-
-.btn-close{
+.btn-close {
     background-color: transparent !important;
     font-size: 1.5rem;
 }
 
-.btn-close:hover{
+.btn-close:hover {
     transform: rotate(90deg);
-    transition: all 0.2s;
+    transition: all 0.4s ease-in-out;
 }
-
 
 @keyframes slideIn {
     from {
@@ -242,17 +320,17 @@ td button:nth-child(2) {
     margin-bottom: 20px;
 }
 
-.form-group {
+.form-group1 {
     margin-bottom: 15px;
 }
 
-.form-group label {
+.form-group1 label {
     display: block;
     margin-bottom: 5px;
 }
 
-.form-group select,
-.form-group textarea {
+.form-group1 select,
+.form-group1 textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -260,12 +338,12 @@ td button:nth-child(2) {
     font-size: 16px;
 }
 
-.form-group textarea {
+.form-group1 textarea {
     resize: vertical;
     height: 80px;
 }
 
-.form-group button {
+.form-group1 button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -275,76 +353,331 @@ td button:nth-child(2) {
     border: none;
     color: #fff;
     font-size: 18px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
-.form-group button:hover {
-    background-color: #0056b3;
+.form-group1 button:hover {
+    background-color: #038820;
+    transition: all 0.3s ease-in-out;
 }
 
-@media (max-width: 600px) {
+.toggle {
+    display: none;
+}
+
+.modal3 {
+    padding: 0px 14px;
+    /* background-color: transparent !important; */
+}
+
+#styling1 {
+    font-weight: 500;
+    border-radius: 12px;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#styling1 a {
+    text-decoration: none;
+}
+
+#styling1 input {
+    margin-top: 10px;
+    width: 30%;
+    border: 1px solid #7e7c7c;
+    border-radius: 6px;
+}
+
+#id {
+    background-color: transparent;
+    color: #0080ff;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#schedule {
+    background-color: transparent;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    color: rgb(83, 82, 82);
+}
+
+.modal-body .feedback-container textarea {
+    width: 100%;
+    padding: 10px;
+}
+
+.feedback-container {
+    /* border: 1px solid #999; */
+    border-radius: 16px;
+    padding: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-size: 1rem;
+    border-radius: 16px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#platform-select {
+    border: 1px solid #999;
+    color: black;
+    border-radius: 12px;
+    padding: 10px;
+    color: #000;
+}
+
+#platform label {
+    display: flex;
+    flex-direction: column !important;
+}
+
+.form-group input {
+    border: 1px solid #999;
+    color: black;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+#zoom-conferences {
+    display: none;
+    margin: 10px;
+    padding: 10px;
+}
+
+#zoom-options {
+    width: 50%;
+    padding: 10px;
+    border-radius: 12px;
+    color: black;
+    border: 1px solid #999;
+    cursor: pointer;
+}
+
+textarea {
+    border-radius: 8px;
+}
+
+.meeting-round-form {
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#meeting-rounds {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 12px;
+    margin: 10px 0px;
+    width: 50%;
+    font-weight: 500;
+}
+
+.meeting-round-form input {
+    padding: 10px !important;
+    border-radius: 12px;
+    border: 2px solid #999;
+    margin: 10px 0px !important;
+    width: 50%;
+}
+
+.meeting-round-form label,
+p {
+    font-weight: 600;
+}
+
+#meeting-taken-by {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+#meeting-feedback {
+    display: flex;
+    margin: 10px 0px;
+    padding: 10px;
+    border: 2px solid #999;
+    border-radius: 12px;
+    width: 100%;
+}
+
+.modal-footer .btn {
+    padding: 17px 50px !important;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#customModal form {
+    max-width: fit-content !important;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
+    border-radius: 8px;
+}
+
+#customModal .modal-content {
+    max-width: fit-content;
+}
+
+#customModal th {
+    background-color: #5a4f95 !important;
+    color: white;
+}
+
+
+@media (max-width: 850px) {
 
     html,
     body {
         display: block;
         width: 100%;
-        padding: 7px;
     }
 
-    .popup {
-        width: 240px !important;
-        padding: 10px;
-    }
-
-    #popupContent {
-        font-size: 14px;
-        padding: 20px;
+    input {
+        width: auto !important;
     }
 
     .container {
+        margin-top: -600px !important;
+        margin-left: -40% !important;
+        /* width: 55% !important; */
+    }
+
+    #customModal .modal-content form {
+        overflow-x: scroll !important;
+        box-shadow: none;
+    }
+}
+
+@media (max-width: 1350px) {
+
+    html,
+    body {
         display: block;
         width: 100%;
-        overflow-x: hidden;
     }
 
-    header h1 {
-        font-size: 18px;
-        padding: 8px 16px;
+    input {
+        width: auto !important;
     }
 
-    table {
-        border: 0;
+    #searchBox {
+        margin-left: -10%;
     }
 
-    table thead {
+    .container {
+        margin-top: -600px !important;
+        margin-left: 20% !important;
+        width: 78% !important;
+        padding: 20px !important;
+    }
+
+    #customModal .modal-content form {
+        overflow-x: scroll !important;
+        box-shadow: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        display: block;
+        width: 100%;
+        background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
+    }
+
+    .navbar {
+        height: 4rem;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        padding: 20px;
+    }
+
+    #responsive-sidebar {
         display: none;
     }
 
-    table tbody tr {
-        display: block;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #ddd;
+    .toggle {
+        display: flex;
+        width: 100%;
     }
 
-    table tbody td {
-        display: block;
-        text-align: right;
-        font-size: 14px;
-        border: none;
+    #popup {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .grid-container {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .container {
+        margin-top: 0px !important;
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    .navbar {
+        /* background-color: rgb(210, 208, 208); */
+    }
+
+    #toggle {
+        left: 80%;
+        top: 20% !important;
         position: relative;
-        padding-left: 50%;
-        padding-top: 10px;
+        width: 50px;
+        border: 1px solid white;
+        transition: all 0.5s ease-in-out;
+        background-color: #5a4f95;
     }
 
-    table tbody td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        font-weight: bold;
-        text-align: left;
+    .offcanvas-body {
+        transition: all 0.5s linear;
+        background: rgba(113, 99, 186, 255);
+    }
+
+    .popup {
+        width: 90%;
+        background-color: rgb(255, 255, 255) !important;
+    }
+
+    .container {
+        background-color: white !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 0.8rem !important;
+    }
+
+    #customModal .modal-content form {
+        overflow-x: scroll !important;
+        box-shadow: none;
+    }
+
+    #styling1 input {
+        width: 140px !important;
+        border: 1px solid #7e7c7c;
+        border-radius: 8px;
+    }
+
+    #searchBox {
+        width: 80% !important;
+        margin: 20px auto;
+        position: relative;
+        left: 50%;
+        top: -34px;
+        transform: translateX(-50%, 20%) !important;
     }
 }
